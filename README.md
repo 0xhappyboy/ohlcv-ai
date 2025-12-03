@@ -1,0 +1,2 @@
+# ohlcv-ai
+🧠AI agents focused on processing ohlcv data structures.
