@@ -2,11 +2,9 @@
 
 🧠AI agents focused on processing ohlcv data structures.
 
-# Rust
+# Aliyun
 
-## Aliyun
-
-### Example 1
+## Example 1
 
 ```rust
 use aliyun_ai::AliyunAI;
@@ -24,7 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### Example 2
+## Example 2
 
 ```rust
 use aliyun_ai::{AliyunAI, create_aliyun_ai};
