@@ -7,7 +7,7 @@ authors = ["happyboy <superhappyboy1995@gmail.com>"]
 license = "Apache-2.0"
 repository = "https://github.com/0xhappyboy/ohlcv-ai/tree/main/crates"
 readme = "README.md"
-keywords = ["aliyun", "ai", "AIAgents", "llm", "deepseek", "OpenAI"]
+keywords = ["ai", "AIAgents", "llm"]
 
 [dependencies]
 reqwest = { version = "0.11", features = ["json", "stream"] }
