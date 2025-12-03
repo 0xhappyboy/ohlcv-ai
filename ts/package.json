@@ -1,21 +1,42 @@
 {
-  "name": "demo1",
+  "name": "ohlcv-ai",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "description": "AI agents focused on processing ohlcv data structures.",
   "scripts": {
     "build": "tsc",
     "start": "yarn install && tsc && node dist/index.js",
     "dev": "yarn install && tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "AI",
+    "AI Agents",
+    "Finance"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xhappyboy/ohlcv-ai.git"
+  },
+  "homepage": "https://github.com/0xhappyboy/ohlcv-ai",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "source": "src/index.tsx",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "author": "happyboy",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }
