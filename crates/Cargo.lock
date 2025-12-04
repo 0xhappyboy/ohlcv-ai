@@ -557,7 +557,7 @@ dependencies = [
 
 [[package]]
 name = "ohlcv-ai"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "futures",
  "regex",
