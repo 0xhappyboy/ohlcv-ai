@@ -148,7 +148,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Math models
     [
         DeepSeekModelType.DEEPSEEK_MATH,
@@ -178,7 +178,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Reasoning models
     [
         DeepSeekModelType.DEEPSEEK_REASONER,
@@ -208,7 +208,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Vision models
     [
         DeepSeekModelType.DEEPSEEK_VISION,
@@ -238,7 +238,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Specialized models
     [
         DeepSeekModelType.DEEPSEEK_FINANCE,
@@ -296,7 +296,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Multimodal models
     [
         DeepSeekModelType.DEEPSEEK_OMNI,
@@ -326,7 +326,7 @@ export const DEEPSEEK_MODELS: Map<DeepSeekModelType, DeepSeekModel> = new Map([
             version: '2025-01'
         }
     ],
-    
+
     // Legacy models
     [
         DeepSeekModelType.DEEPSEEK_LLM,
@@ -367,22 +367,22 @@ export function getAvailableDeepSeekModelTypes(): DeepSeekModelType[] {
 
 // Helper functions for specific model categories
 export function getDeepSeekTextModels(): DeepSeekModel[] {
-    return getAllDeepSeekModels().filter(model => 
-        model.capabilities?.includes('text-generation') && 
+    return getAllDeepSeekModels().filter(model =>
+        model.capabilities?.includes('text-generation') &&
         !model.capabilities?.includes('image-understanding') &&
         !model.capabilities?.includes('audio-processing')
     );
 }
 
 export function getDeepSeekCodingModels(): DeepSeekModel[] {
-    return getAllDeepSeekModels().filter(model => 
+    return getAllDeepSeekModels().filter(model =>
         model.capabilities?.includes('code-generation') ||
         model.capabilities?.includes('programming')
     );
 }
 
 export function getDeepSeekReasoningModels(): DeepSeekModel[] {
-    return getAllDeepSeekModels().filter(model => 
+    return getAllDeepSeekModels().filter(model =>
         model.capabilities?.includes('reasoning') ||
         model.capabilities?.includes('logical-reasoning') ||
         model.capabilities?.includes('complex-reasoning')
@@ -390,7 +390,7 @@ export function getDeepSeekReasoningModels(): DeepSeekModel[] {
 }
 
 export function getDeepSeekFinancialModels(): DeepSeekModel[] {
-    return getAllDeepSeekModels().filter(model => 
+    return getAllDeepSeekModels().filter(model =>
         model.capabilities?.includes('financial-analysis') ||
         model.capabilities?.includes('market-prediction')
     );
@@ -398,58 +398,68 @@ export function getDeepSeekFinancialModels(): DeepSeekModel[] {
 
 export function getDeepSeekSpecializedModels(): DeepSeekModel[] {
     const specializedCapabilities = [
-        'financial-analysis', 
-        'medical-consultation', 
+        'financial-analysis',
+        'medical-consultation',
         'mathematical-reasoning',
         'legal-analysis',
         'academic-research'
     ];
-    return getAllDeepSeekModels().filter(model => 
+    return getAllDeepSeekModels().filter(model =>
         model.capabilities?.some(cap => specializedCapabilities.includes(cap))
     );
 }
 
 export function getDeepSeekMultimodalModels(): DeepSeekModel[] {
-    return getAllDeepSeekModels().filter(model => 
+    return getAllDeepSeekModels().filter(model =>
         model.capabilities?.includes('multimodal')
     );
 }
 
 export function getBestModelForTask(taskType: string): DeepSeekModel | undefined {
     const models = getAllDeepSeekModels();
-    
+
     switch (taskType.toLowerCase()) {
         case 'chat':
         case 'conversation':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_CHAT_PRO);
-            
+
         case 'coding':
         case 'programming':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_CODER);
-            
+
         case 'reasoning':
         case 'analysis':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_REASONER_PRO);
-            
+
         case 'finance':
         case 'financial':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_FINANCE);
-            
+
         case 'math':
         case 'mathematics':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_MATH_PRO);
-            
+
         case 'vision':
         case 'image':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_VISION_PRO);
-            
+
         case 'multimodal':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_OMNI_PRO);
-            
+
         case 'research':
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_RESEARCH);
-            
+
         default:
             return models.find(m => m.name === DeepSeekModelType.DEEPSEEK_CHAT);
     }
+}
+
+export function stringToDeepSeekModelType(modelString: string): DeepSeekModelType | null {
+    const validValues = Object.values(DeepSeekModelType);
+    for (const value of validValues) {
+        if (value === modelString) {
+            return value as DeepSeekModelType;
+        }
+    }
+    return null;
 }

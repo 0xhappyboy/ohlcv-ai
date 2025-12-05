@@ -12,6 +12,7 @@ export {
     getAllModels,
     getModelByName,
     getAvailableAliYunModelTypes,
+    stringToAliYunModelType
 } from './aliyun/model';
 
 // deepseek
@@ -23,6 +24,7 @@ export {
     getAllDeepSeekModels,
     getDeepSeekModelByName,
     getAvailableDeepSeekModelTypes,
+    stringToDeepSeekModelType
 } from './deepseek/model';
 export type {
     DeepSeekConfig,
@@ -55,7 +57,8 @@ export {
     getCostEfficientModels,
     getHighContextModels,
     estimateCost,
-    suggestModel
+    suggestModel,
+    stringToOpenAIModelType
 } from './openai/model';
 export type { OpenAIModel } from './openai/model';
 export type { CostEstimate } from './openai/model';

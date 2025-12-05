@@ -430,28 +430,28 @@ export function getAvailableAliYunModelTypes(): AliYunModelType[] {
 
 // Helper functions for specific model categories
 export function getTextModels(): Model[] {
-    return getAllModels().filter(model => 
-        model.capabilities?.includes('text-generation') && 
+    return getAllModels().filter(model =>
+        model.capabilities?.includes('text-generation') &&
         !model.capabilities?.includes('image-understanding') &&
         !model.capabilities?.includes('audio-processing')
     );
 }
 
 export function getVisionModels(): Model[] {
-    return getAllModels().filter(model => 
+    return getAllModels().filter(model =>
         model.capabilities?.includes('image-understanding')
     );
 }
 
 export function getAudioModels(): Model[] {
-    return getAllModels().filter(model => 
+    return getAllModels().filter(model =>
         model.capabilities?.includes('audio-processing') ||
         model.capabilities?.includes('speech-recognition')
     );
 }
 
 export function getCodingModels(): Model[] {
-    return getAllModels().filter(model => 
+    return getAllModels().filter(model =>
         model.capabilities?.includes('code-generation') ||
         model.capabilities?.includes('programming')
     );
@@ -459,17 +459,27 @@ export function getCodingModels(): Model[] {
 
 export function getSpecializedModels(): Model[] {
     const specializedCapabilities = [
-        'financial-analysis', 
-        'medical-consultation', 
+        'financial-analysis',
+        'medical-consultation',
         'mathematical-reasoning'
     ];
-    return getAllModels().filter(model => 
+    return getAllModels().filter(model =>
         model.capabilities?.some(cap => specializedCapabilities.includes(cap))
     );
 }
 
 export function getMultimodalModels(): Model[] {
-    return getAllModels().filter(model => 
+    return getAllModels().filter(model =>
         model.capabilities?.includes('multimodal')
     );
+}
+
+export function stringToAliYunModelType(modelString: string): AliYunModelType | null {
+    const validValues = Object.values(AliYunModelType);
+    for (const value of validValues) {
+        if (value === modelString) {
+            return value as AliYunModelType;
+        }
+    }
+    return null;
 }

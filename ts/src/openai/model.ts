@@ -44,11 +44,11 @@ export enum OpenAIModelType {
   // Moderation Models
   MODERATION_LATEST = 'text-moderation-latest',
   MODERATION_STABLE = 'text-moderation-stable',
-  
+
   // Fine-tuned Models
   GPT3_5_TURBO_FINETUNED = 'ft:gpt-3.5-turbo-0125:personal:',
   GPT4_FINETUNED = 'ft:gpt-4-0125-preview:personal:',
-  
+
   // Vision Models
   GPT4_VISION_PREVIEW = 'gpt-4-vision-preview',
 }
@@ -133,7 +133,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['chat', 'function-calling', 'vision', 'json-mode']
     }
   ],
-  
+
   // GPT-3.5 Series
   [
     OpenAIModelType.GPT3_5_TURBO,
@@ -167,7 +167,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['completions']
     }
   ],
-  
+
   // Embedding Models
   [
     OpenAIModelType.TEXT_EMBEDDING_ADA_002,
@@ -197,7 +197,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['embeddings']
     }
   ],
-  
+
   // DALL-E Image Generation
   [
     OpenAIModelType.DALL_E_3,
@@ -212,7 +212,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['image-generation', 'variations', 'edits']
     }
   ],
-  
+
   // Whisper Speech Recognition
   [
     OpenAIModelType.WHISPER_1,
@@ -227,7 +227,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['transcriptions', 'translations']
     }
   ],
-  
+
   // TTS Text-to-Speech
   [
     OpenAIModelType.TTS_1_HD,
@@ -242,7 +242,7 @@ export const OPENAI_MODELS: Map<OpenAIModelType, OpenAIModel> = new Map([
       supportedFeatures: ['speech', 'voice-selection']
     }
   ],
-  
+
   // Moderation Models
   [
     OpenAIModelType.MODERATION_LATEST,
@@ -283,32 +283,32 @@ export function getAvailableOpenAIModelTypes(): OpenAIModelType[] {
 
 // Category-based helper functions
 export function getChatModels(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     model.capabilities.includes('chat')
   );
 }
 
 export function getCompletionModels(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     model.capabilities.includes('text-completion')
   );
 }
 
 export function getEmbeddingModels(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     model.capabilities.includes('embeddings')
   );
 }
 
 export function getVisionModelsOpenAI(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
-    model.capabilities.includes('vision') || 
+  return getAllOpenAIModels().filter(model =>
+    model.capabilities.includes('vision') ||
     model.capabilities.includes('image-generation')
   );
 }
 
 export function getAudioModelsOpenAI(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     model.capabilities.includes('audio-processing') ||
     model.capabilities.includes('speech-recognition') ||
     model.capabilities.includes('speech-synthesis')
@@ -316,7 +316,7 @@ export function getAudioModelsOpenAI(): OpenAIModel[] {
 }
 
 export function getMultimodalModelsOpenAI(): OpenAIModel[] {
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     model.capabilities.includes('multimodal')
   );
 }
@@ -330,7 +330,7 @@ export function getLatestModels(): OpenAIModel[] {
     OpenAIModelType.TEXT_EMBEDDING_3_SMALL,
     OpenAIModelType.DALL_E_3,
   ];
-  return getAllOpenAIModels().filter(model => 
+  return getAllOpenAIModels().filter(model =>
     latestModels.includes(model.name as OpenAIModelType)
   );
 }
@@ -394,37 +394,47 @@ export function suggestModel(
       candidates = candidates.filter(m => m.capabilities.includes('embeddings'));
       break;
     case 'image':
-      candidates = candidates.filter(m => 
-        m.capabilities.includes('image-generation') || 
+      candidates = candidates.filter(m =>
+        m.capabilities.includes('image-generation') ||
         m.capabilities.includes('vision')
       );
       break;
     case 'audio':
-      candidates = candidates.filter(m => 
-        m.capabilities.includes('speech-recognition') || 
+      candidates = candidates.filter(m =>
+        m.capabilities.includes('speech-recognition') ||
         m.capabilities.includes('speech-synthesis')
       );
       break;
   }
   // Filter by context length
   if (requirements.contextLength) {
-    candidates = candidates.filter(m => 
+    candidates = candidates.filter(m =>
       m.contextLength && m.contextLength >= requirements.contextLength!
     );
   }
   // Filter by feature requirements
   if (requirements.features && requirements.features.length > 0) {
     candidates = candidates.filter(m =>
-      requirements.features!.every(feature => 
+      requirements.features!.every(feature =>
         m.supportedFeatures?.includes(feature) || m.capabilities.includes(feature)
       )
     );
   }
   // Sort by budget if provided
   if (requirements.budget) {
-    candidates.sort((a, b) => 
+    candidates.sort((a, b) =>
       (a.inputCostPer1KTokens || 0) - (b.inputCostPer1KTokens || 0)
     );
   }
   return candidates.slice(0, 5); // Return top 5 recommendations
+}
+
+export function stringToOpenAIModelType(modelString: string): OpenAIModelType | null {
+  const validValues = Object.values(OpenAIModelType);
+  for (const value of validValues) {
+    if (value === modelString) {
+      return value as OpenAIModelType;
+    }
+  }
+  return null;
 }
