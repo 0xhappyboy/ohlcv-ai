@@ -1,4 +1,4 @@
-import { OHLCV } from "@/types";
+import { OHLCV } from "..";
 import { DeepSeekModelType, DEEPSEEK_MODELS } from "./model";
 
 // Chat message interface

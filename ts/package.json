@@ -1,21 +1,15 @@
 {
   "name": "ohlcv-ai",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "AI agents focused on processing ohlcv data structures.",
-  "scripts": {
-    "build": "tsc",
-    "start": "yarn install && tsc && node dist/index.js",
-    "dev": "yarn install && tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "AI",
-    "AI Agents",
-    "Finance"
-  ],
+  "author": "happyboy",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0xhappyboy/ohlcv-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0xhappyboy/ohlcv-ai/issues"
   },
   "homepage": "https://github.com/0xhappyboy/ohlcv-ai",
   "main": "dist/index.js",
@@ -29,14 +23,33 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "author": "happyboy",
-  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "clean": "rm -rf dist node_modules/.cache .tsbuildinfo",
+    "build": "vite build",
+    "build:fast": "vite build --mode development",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "start": "vite build --watch",
+    "dev": "vite",
+    "prepare": "npm run build",
+    "test": "run-s test:unit test:lint",
+    "test:build": "vite build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd example && yarn install && yarn run build",
+    "deploy": "gh-pages -d example/build"
+  },
+  "peerDependencies": {},
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript":"^5.9.3"
   },
-  "dependencies": {
-    "dotenv": "^17.2.3"
-  }
+  "files": [
+    "dist"
+  ]
 }

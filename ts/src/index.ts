@@ -33,9 +33,7 @@ export type {
 
 export {
     OpenAIModelType,
-    OPENAI_MODELS,
-    OpenAIModel,
-    getOpenAIModel,
+    OPENAI_MODELS, getOpenAIModel,
     getAllOpenAIModels,
     getOpenAIModelByName,
     getAvailableOpenAIModelTypes,
@@ -49,9 +47,10 @@ export {
     getCostEfficientModels,
     getHighContextModels,
     estimateCost,
-    suggestModel,
+    suggestModel
 } from './openai/model';
+export type { OpenAIModel } from './openai/model';
 export type { CostEstimate } from './openai/model';
 
-export { OHLCV } from '@/types';
-export type { ChatMessage } from '@/types';
+export type { OHLCV } from './types';
+export type { ChatMessage } from './types';

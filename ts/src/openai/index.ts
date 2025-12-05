@@ -1,4 +1,4 @@
-import { ChatMessage, OHLCV } from '@/types';
+import { ChatMessage, OHLCV } from '..';
 import { OpenAIModelType, OPENAI_MODELS } from './model';
 
 // Minimal configuration
