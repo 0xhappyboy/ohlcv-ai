@@ -1,6 +1,6 @@
 {
   "name": "ohlcv-ai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI agents focused on processing ohlcv data structures.",
   "scripts": {
     "build": "tsc",

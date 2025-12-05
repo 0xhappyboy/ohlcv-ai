@@ -1,6 +1,7 @@
 // aliyun
-export {
-    AliyunAI, createAliyunAI, AliyunConfig,
+export { AliyunAI, createAliyunAI } from './aliyun';
+export type {
+    AliyunConfig,
     AliYunChatOptions,
     AliYunStreamCallback,
 } from './aliyun';
@@ -23,7 +24,12 @@ export type {
 } from './deepseek';
 
 // open ai
-export { OpenAI, createOpenAI, OpenAIConfig, OpenAIChatOptions, OpenAIStreamCallback } from './openai';
+export { OpenAI, createOpenAI } from './openai';
+export type {
+    OpenAIConfig,
+    OpenAIChatOptions,
+    OpenAIStreamCallback
+} from './openai';
 
 export {
     OpenAIModelType,
@@ -44,7 +50,8 @@ export {
     getHighContextModels,
     estimateCost,
     suggestModel,
-    CostEstimate
 } from './openai/model';
+export type { CostEstimate } from './openai/model';
 
-export { OHLCV } from '@/types'
+export { OHLCV } from '@/types';
+export type { ChatMessage } from '@/types';
