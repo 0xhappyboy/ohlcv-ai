@@ -7,14 +7,22 @@ export type {
 } from './aliyun';
 export {
     AliYunModelType,
-    ALIYUN_MODELS
+    ALIYUN_MODELS,
+    getModel,
+    getAllModels,
+    getModelByName,
+    getAvailableAliYunModelTypes,
 } from './aliyun/model';
 
 // deepseek
 export { DeepSeekAI, createDeepSeekAI } from './deepseek';
 export {
     DeepSeekModelType,
-    DEEPSEEK_MODELS
+    DEEPSEEK_MODELS,
+    getDeepSeekModel,
+    getAllDeepSeekModels,
+    getDeepSeekModelByName,
+    getAvailableDeepSeekModelTypes,
 } from './deepseek/model';
 export type {
     DeepSeekConfig,

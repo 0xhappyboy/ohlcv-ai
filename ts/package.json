@@ -1,6 +1,6 @@
 {
    "name": "ohlcv-ai",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "AI agents focused on processing ohlcv data structures.",
   "author": "happyboy",
   "license": "Apache-2.0",
