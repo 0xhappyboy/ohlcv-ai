@@ -14,7 +14,6 @@ export interface AliYunChatOptions {
   maxTokens?: number;
   stream?: boolean;
   systemPrompt?: string;
-  modelType?: AliYunModelType; // Add modelType option
 }
 
 // Streaming response callback
@@ -66,7 +65,7 @@ export class AliyunAI {
       temperature: options?.temperature,
       maxTokens: options?.maxTokens,
       stream: false,
-      modelType: options?.modelType
+      modelType: this.modelType
     });
     return this.extractContent(response);
   }
@@ -303,7 +302,7 @@ ${dataString}
         temperature: options?.temperature || 0.5,
         maxTokens: options?.maxTokens || 1500,
         stream: false,
-        modelType: options?.modelType
+        modelType: this.modelType
       });
       const content = this.extractContent(response);
       return content;
@@ -360,7 +359,7 @@ Format as JSON: {"summary": "...", "details": ["...", "..."], "recommendations":
           temperature: options?.temperature || 0.4,
           maxTokens: options?.maxTokens || 1200,
           stream: false,
-          modelType: options?.modelType
+          modelType: this.modelType
         });
         const content = this.extractContent(response);
         try {
@@ -448,7 +447,7 @@ Please process this data according to the system instructions. Remember to retur
         temperature: options?.temperature || 0.3,
         maxTokens,
         stream: false,
-        modelType: options?.modelType
+        modelType: this.modelType
       });
       const content = this.extractContent(response);
       const result = this.parseOHLCVResponse(content);

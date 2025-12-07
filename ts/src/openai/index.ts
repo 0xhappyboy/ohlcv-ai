@@ -16,12 +16,11 @@ export interface OpenAIChatOptions {
     maxTokens?: number;
     stream?: boolean;
     systemPrompt?: string;
-    modelType?: OpenAIModelType;
     topP?: number;
     frequencyPenalty?: number;
     presencePenalty?: number;
     stop?: string[];
-    i18n?: 'en' | 'cn'; 
+    i18n?: 'en' | 'cn';
 }
 
 // Streaming response callback
@@ -69,7 +68,6 @@ export class OpenAI {
         const messages: ChatMessage[] = [];
         const languagePrompt = i18n === 'en' ? 'Please respond in English only.' :
             i18n === 'cn' ? '请使用中文回答。' : '';
-
         if (options?.systemPrompt || languagePrompt) {
             const systemMessage = [options?.systemPrompt, languagePrompt]
                 .filter(Boolean)
@@ -77,7 +75,6 @@ export class OpenAI {
             messages.push({ role: 'system', content: systemMessage });
         }
         messages.push({ role: 'user', content: message });
-
         const response = await this.chatCompletion(messages, i18n, {
             temperature: options?.temperature,
             maxTokens: options?.maxTokens,
@@ -87,7 +84,6 @@ export class OpenAI {
             presencePenalty: options?.presencePenalty,
             stop: options?.stop
         });
-
         return this.extractContent(response);
     }
 
@@ -337,7 +333,7 @@ ${dataString}
                 temperature: options?.temperature || 0.5,
                 maxTokens: options?.maxTokens || 1500,
                 stream: false,
-                modelType: options?.modelType,
+                modelType: this.modelType,
                 topP: options?.topP,
                 frequencyPenalty: options?.frequencyPenalty,
                 presencePenalty: options?.presencePenalty,
@@ -398,7 +394,7 @@ Format as JSON: {"summary": "...", "details": ["...", "..."], "recommendations":
                     temperature: options?.temperature || 0.4,
                     maxTokens: options?.maxTokens || 1200,
                     stream: false,
-                    modelType: options?.modelType
+                    modelType: this.modelType
                 });
                 const content = this.extractContent(response);
                 try {
@@ -479,7 +475,7 @@ Please process this data according to the system instructions. Remember to retur
                 temperature: options?.temperature || 0.3,
                 maxTokens,
                 stream: false,
-                modelType: options?.modelType,
+                modelType: this.modelType,
                 topP: options?.topP,
                 frequencyPenalty: options?.frequencyPenalty,
                 presencePenalty: options?.presencePenalty,
